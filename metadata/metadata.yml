@@ -1,0 +1,16 @@
+metadata_version: 1
+name: MOSuite - Plot Venn Diagram
+description: |-
+  Create Venn diagram or Intersection plot visualizations of differential expression results across multiple contrasts. Supports up to five contrasts for Venn diagrams and any number of contrasts for Intersection plots.
+
+  Multi-Omics Suite provides a suite of functions to clean, filter, batch-correct, normalize, visualize, and perform differential expression analysis. While the package is designed for differential RNA-seq analysis and multi-omics datasets, it can be used for any data represented in a counts table. See the website for more information, documentation, and examples: https://ccbr.github.io/MOSuite/
+tags:
+- MOSuite
+- Bulk RNA-seq
+- visualization
+- Venn diagram
+- Intersection plot
+- Differential expression
+authors:
+- name: CCR Collaborative Bioinformatics Resource
+- name: Kelly Sovacool

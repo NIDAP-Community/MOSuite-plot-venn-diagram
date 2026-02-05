@@ -1,0 +1,321 @@
+{
+	"version": 1,
+	"named_parameters": true,
+	"general": {
+		"title": "MOSuite - Plot Venn Diagram",
+		"instructions": "Create Venn diagram or Intersection plot visualizations of differential expression results across multiple contrasts"
+	},
+	"datasets": [
+		{
+			"id": "318a2347-25cb-4210-9c1b-f9736f450deb",
+			"name": "multiOmicDataSet"
+		}
+	],
+	"categories": [
+		{
+			"id": "7Rr6IxOMDucKMImp",
+			"name": "Input Data Parameters",
+			"description": "Options for defining input data",
+			"icon": "📁"
+		},
+		{
+			"id": "EzTg1ivlFDHEy9PI",
+			"name": "Basic",
+			"icon": "📂"
+		},
+		{
+			"id": "FvI4Z2eb9sjL47Jt",
+			"name": "Advanced",
+			"description": "Advanced venn diagram customization",
+			"icon": "📂"
+		},
+		{
+			"id": "PlotStyling",
+			"name": "Visualization",
+			"description": "Visualization and plotting options",
+			"icon": "📊"
+		}
+	],
+	"parameters": [
+		{
+			"id": "ZvGNzbTfFDAiJ8Lv",
+			"category": "7Rr6IxOMDucKMImp",
+			"name": "multiOmicDataSet file pattern",
+			"param_name": "regex_moo",
+			"description": "Regex pattern used to locate the multiOmicDataSet .rds file",
+			"type": "text",
+			"value_type": "string",
+			"default_value": ".*\\\\.rds$"
+		},
+		{
+			"id": "feature_id_colname_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Feature ID column name",
+			"param_name": "feature_id_colname",
+			"description": "Column name for feature IDs (gene names, etc). If not provided, uses first column",
+			"type": "text",
+			"value_type": "string"
+		},
+		{
+			"id": "contrasts_colname_id",
+			"category": "EzTg1ivlFDHEy9PI",
+			"name": "Contrasts column name",
+			"param_name": "contrasts_colname",
+			"description": "Column name in data that contains the contrast names",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "Contrast"
+		},
+		{
+			"id": "select_contrasts_id",
+			"category": "EzTg1ivlFDHEy9PI",
+			"name": "Select contrasts",
+			"param_name": "select_contrasts",
+			"description": "Comma-separated contrast names to select for the plot. If empty, all contrasts are used.",
+			"type": "text",
+			"value_type": "string"
+		},
+		{
+			"id": "plot_type_id",
+			"category": "EzTg1ivlFDHEy9PI",
+			"name": "Plot type",
+			"param_name": "plot_type",
+			"description": "Type of plot to generate: 'Venn diagram' or 'Intersection plot'",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "Venn diagram"
+		},
+		{
+			"id": "intersection_ids_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Intersection IDs",
+			"param_name": "intersection_ids",
+			"description": "Comma-separated intersection IDs to select for the plot. If empty, all intersections are used.",
+			"type": "text",
+			"value_type": "string"
+		},
+		{
+			"id": "venn_force_unique_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Force unique elements",
+			"param_name": "venn_force_unique",
+			"description": "Force unique elements in the Venn diagram",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "TRUE"
+		},
+		{
+			"id": "venn_numbers_format_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Venn numbers format",
+			"param_name": "venn_numbers_format",
+			"description": "Format for numbers in the Venn diagram: 'raw', 'percent', 'raw-percent', or 'percent-raw'",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "raw"
+		},
+		{
+			"id": "venn_significant_digits_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Venn significant digits",
+			"param_name": "venn_significant_digits",
+			"description": "Number of significant digits for the Venn diagram numbers",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "2"
+		},
+		{
+			"id": "venn_fill_colors_id",
+			"category": "PlotStyling",
+			"name": "Venn fill colors",
+			"param_name": "venn_fill_colors",
+			"description": "Comma-separated fill colors for Venn diagram categories",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "darkgoldenrod2,darkolivegreen2,mediumpurple3,darkorange2,lightgreen"
+		},
+		{
+			"id": "venn_fill_transparency_id",
+			"category": "PlotStyling",
+			"name": "Venn fill transparency",
+			"param_name": "venn_fill_transparency",
+			"description": "Transparency level for the Venn diagram fill colors (0-1)",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "0.2"
+		},
+		{
+			"id": "venn_border_colors_id",
+			"category": "PlotStyling",
+			"name": "Venn border colors",
+			"param_name": "venn_border_colors",
+			"description": "Border colors for Venn diagram categories. Set to 'fill colors' to use fill colors, or specify color names.",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "fill colors"
+		},
+		{
+			"id": "venn_font_size_for_category_names_id",
+			"category": "PlotStyling",
+			"name": "Category names font size",
+			"param_name": "venn_font_size_for_category_names",
+			"description": "Font size for category names in the Venn diagram",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "3"
+		},
+		{
+			"id": "venn_category_names_distance_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Category names distance",
+			"param_name": "venn_category_names_distance",
+			"description": "Distance of category names from Venn circles (comma-separated numeric values)",
+			"type": "text",
+			"value_type": "string"
+		},
+		{
+			"id": "venn_category_names_position_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Category names position",
+			"param_name": "venn_category_names_position",
+			"description": "Position of category names (in degrees, comma-separated numeric values)",
+			"type": "text",
+			"value_type": "string"
+		},
+		{
+			"id": "venn_font_size_for_counts_id",
+			"category": "PlotStyling",
+			"name": "Counts font size",
+			"param_name": "venn_font_size_for_counts",
+			"description": "Font size for counts in the Venn diagram",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "6"
+		},
+		{
+			"id": "venn_outer_margin_id",
+			"category": "PlotStyling",
+			"name": "Outer margin",
+			"param_name": "venn_outer_margin",
+			"description": "Outer margin for the Venn diagram",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "0"
+		},
+		{
+			"id": "intersections_order_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Intersections order",
+			"param_name": "intersections_order",
+			"description": "Order of intersections in the plot: 'degree' or 'freq'",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "degree"
+		},
+		{
+			"id": "display_empty_intersections_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Display empty intersections",
+			"param_name": "display_empty_intersections",
+			"description": "Display empty intersections in the plot",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "FALSE"
+		},
+		{
+			"id": "intersection_bar_color_id",
+			"category": "PlotStyling",
+			"name": "Intersection bar color",
+			"param_name": "intersection_bar_color",
+			"description": "Color for the intersection bars in the plot",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "steelblue4"
+		},
+		{
+			"id": "intersection_point_size_id",
+			"category": "PlotStyling",
+			"name": "Intersection point size",
+			"param_name": "intersection_point_size",
+			"description": "Size of points in the intersection plot",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "2.2"
+		},
+		{
+			"id": "intersection_line_width_id",
+			"category": "PlotStyling",
+			"name": "Intersection line width",
+			"param_name": "intersection_line_width",
+			"description": "Width of lines in the intersection plot",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "0.7"
+		},
+		{
+			"id": "table_font_size_id",
+			"category": "PlotStyling",
+			"name": "Table font size",
+			"param_name": "table_font_size",
+			"description": "Font size for the table in the plot",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "0.7"
+		},
+		{
+			"id": "table_content_id",
+			"category": "FvI4Z2eb9sjL47Jt",
+			"name": "Table content",
+			"param_name": "table_content",
+			"description": "Content of the table: 'all intersections' or 'selected intersections'",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "all intersections"
+		},
+		{
+			"id": "image_width_id",
+			"category": "PlotStyling",
+			"name": "Image width",
+			"param_name": "image_width",
+			"description": "Output image width in pixels",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "4000"
+		},
+		{
+			"id": "image_height_id",
+			"category": "PlotStyling",
+			"name": "Image height",
+			"param_name": "image_height",
+			"description": "Output image height in pixels",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "3000"
+		},
+		{
+			"id": "dpi_id",
+			"category": "PlotStyling",
+			"name": "DPI",
+			"param_name": "dpi",
+			"description": "Dots per inch of output image",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "300"
+		},
+		{
+			"id": "plot_filename_id",
+			"category": "PlotStyling",
+			"name": "Plot filename",
+			"param_name": "plot_filename",
+			"description": "Plot output filename",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "venn_diagram.png"
+		}
+	],
+	"results": [
+		{
+			"file_name": "figures/diff/venn_diagram.png"
+		}
+	]
+}
