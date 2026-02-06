@@ -1,6 +1,6 @@
 # Code Ocean capsule - MOSuite - Plot Venn Diagram
 
-## development version
+## v2.0
 
 - Use MOSuite v0.3.0.
 - Fix: remove `regex_moo` parameter from configuration. multiOmicDataSet input files are now required to follow the standardized naming pattern (`.*\.rds$`).
