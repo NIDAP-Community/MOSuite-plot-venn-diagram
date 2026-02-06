@@ -7,6 +7,23 @@ library(readr)
 library(stringr)
 library(dplyr)
 
+# parse comma-separated numeric vectors
+parse_numeric_vector <- function(x) {
+    if (is.null(x) || identical(x, "") || length(x) == 0) {
+        return(NULL)
+    }
+    parts <- trimws(unlist(strsplit(x, ",")))
+    parts <- parts[parts != ""]
+    if (length(parts) == 0) {
+        return(NULL)
+    }
+    nums <- suppressWarnings(as.numeric(parts))
+    if (any(is.na(nums))) {
+        stop("parse_numeric_vector: non-numeric values provided")
+    }
+    return(nums)
+}
+
 # set up capsule environment
 setup_capsule_environment()
 
