@@ -1,10 +1,10 @@
-# hash:sha256:df77097b43311ec3ddb860d48357daa88532fd4021146e7d86c1502d88bfa9f2
+# hash:sha256:3ddd04105ec5ac0dc17d676e30ef154cb818689953c1d6cdcd656c82272f4902
 ARG REGISTRY_HOST
-FROM $REGISTRY_HOST/codeocean/mosuite:v0.3.0.9000_ba73bcc
+FROM $REGISTRY_HOST/codeocean/mosuite-minimal:v0.3.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG GIT_ASKPASS
-COPY git-askpass /
+COPY git-ask-pass /
 
 COPY postInstall /
 RUN --mount=type=secret,id=secrets . /run/secrets/secrets \
