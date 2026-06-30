@@ -3,5 +3,9 @@ testthat::test_that("test setup has expected capsule files", {
 
   testthat::expect_true(file.exists(file.path(repo_root, "code", "main.R")))
   testthat::expect_true(file.exists(file.path(repo_root, "code", "run")))
-  testthat::expect_true(file.exists(file.path(repo_root, ".codeocean", "app-panel.json")))
+  testthat::expect_true(file.exists(file.path(
+    repo_root,
+    ".codeocean",
+    "app-panel.json"
+  )))
 })

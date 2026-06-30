@@ -47,8 +47,14 @@ test_that("Venn diagram capsule keeps expected CLI parameter contract", {
   expect_same_values(extract_main_arguments(main_lines), expected_args)
   expect_match(main_text, "plot_volcano_summary\\(")
   expect_match(main_text, "plot_venn_diagram\\(")
-  expect_match(main_text, "select_contrasts = parse_optional_vector\\(args\\$select_contrasts\\)")
-  expect_match(main_text, "intersection_ids = parse_numeric_vector\\(args\\$intersection_ids\\)")
+  expect_match(
+    main_text,
+    "select_contrasts = parse_optional_vector\\(args\\$select_contrasts\\)"
+  )
+  expect_match(
+    main_text,
+    "intersection_ids = parse_numeric_vector\\(args\\$intersection_ids\\)"
+  )
   expect_match(main_text, "readr::write_csv\\(")
   expect_match(main_text, "venn_diagram_data\\.csv")
 })
@@ -70,21 +76,43 @@ test_that("numeric vector parser handles Venn optional numeric fields", {
 test_that("Code Ocean panel preserves Venn diagram defaults", {
   panel_lines <- read_repo_file(".codeocean", "app-panel.json")
 
-  expect_equal(extract_panel_default(panel_lines, "contrasts_colname"), "Contrast")
+  expect_equal(
+    extract_panel_default(panel_lines, "contrasts_colname"),
+    "Contrast"
+  )
   expect_equal(extract_panel_default(panel_lines, "plot_type"), "Venn diagram")
   expect_equal(extract_panel_default(panel_lines, "venn_numbers_format"), "raw")
-  expect_equal(extract_panel_default(panel_lines, "venn_fill_colors"), "darkgoldenrod2,darkolivegreen2,mediumpurple3,darkorange2,lightgreen")
-  expect_equal(extract_panel_default(panel_lines, "venn_border_colors"), "fill colors")
-  expect_equal(extract_panel_default(panel_lines, "intersections_order"), "degree")
-  expect_equal(extract_panel_default(panel_lines, "table_content"), "all intersections")
-  expect_equal(extract_panel_default(panel_lines, "plot_filename"), "venn_diagram.png")
+  expect_equal(
+    extract_panel_default(panel_lines, "venn_fill_colors"),
+    "darkgoldenrod2,darkolivegreen2,mediumpurple3,darkorange2,lightgreen"
+  )
+  expect_equal(
+    extract_panel_default(panel_lines, "venn_border_colors"),
+    "fill colors"
+  )
+  expect_equal(
+    extract_panel_default(panel_lines, "intersections_order"),
+    "degree"
+  )
+  expect_equal(
+    extract_panel_default(panel_lines, "table_content"),
+    "all intersections"
+  )
+  expect_equal(
+    extract_panel_default(panel_lines, "plot_filename"),
+    "venn_diagram.png"
+  )
 })
 
 test_that("Code Ocean boolean controls are TRUE/FALSE lists", {
   panel_lines <- read_repo_file(".codeocean", "app-panel.json")
 
   expect_boolean_list_parameter(panel_lines, "venn_force_unique", "TRUE")
-  expect_boolean_list_parameter(panel_lines, "display_empty_intersections", "FALSE")
+  expect_boolean_list_parameter(
+    panel_lines,
+    "display_empty_intersections",
+    "FALSE"
+  )
 })
 
 test_that("run wrapper prepares result directories and forwards CLI arguments", {
