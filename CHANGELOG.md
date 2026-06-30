@@ -1,5 +1,9 @@
 # Code Ocean capsule - MOSuite - Plot Venn Diagram
 
+## Development version
+
+- Improved the Code Ocean parameter UI for the plot venn diagram capsule (#2).
+
 ## v2.0
 
 - Use MOSuite v0.3.0.
