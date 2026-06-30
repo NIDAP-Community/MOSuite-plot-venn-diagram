@@ -18,16 +18,28 @@
 			"icon": "📂"
 		},
 		{
+			"id": "VisGeneral",
+			"name": "Visualization: General",
+			"description": "General visualization and plotting options",
+			"icon": "\ud83d\udcca"
+		},
+		{
+			"id": "VisVennDiagram",
+			"name": "Visualization: Venn Diagram",
+			"description": "Venn diagram visualization options",
+			"icon": "\ud83d\udcca"
+		},
+		{
+			"id": "VisIntersectionPlot",
+			"name": "Visualization: Intersection Plot",
+			"description": "Intersection plot visualization options",
+			"icon": "\ud83d\udcca"
+		},
+		{
 			"id": "FvI4Z2eb9sjL47Jt",
 			"name": "Advanced",
 			"description": "Advanced venn diagram customization",
 			"icon": "📂"
-		},
-		{
-			"id": "PlotStyling",
-			"name": "Visualization",
-			"description": "Visualization and plotting options",
-			"icon": "📊"
 		}
 	],
 	"parameters": [
@@ -52,7 +64,7 @@
 		},
 		{
 			"id": "plot_type_id",
-			"category": "EzTg1ivlFDHEy9PI",
+			"category": "VisGeneral",
 			"name": "Plot type",
 			"param_name": "plot_type",
 			"description": "Type of plot to generate: 'Venn diagram' or 'Intersection plot'",
@@ -71,7 +83,7 @@
 		},
 		{
 			"id": "intersection_ids_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisIntersectionPlot",
 			"name": "Intersection IDs",
 			"param_name": "intersection_ids",
 			"description": "Comma-separated intersection IDs to select for the plot. If empty, all intersections are used.",
@@ -80,17 +92,21 @@
 		},
 		{
 			"id": "venn_force_unique_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisVennDiagram",
 			"name": "Force unique elements",
 			"param_name": "venn_force_unique",
 			"description": "Force unique elements in the Venn diagram",
-			"type": "text",
+			"type": "list",
 			"value_type": "string",
-			"default_value": "TRUE"
+			"default_value": "TRUE",
+			"extra_data": [
+				"TRUE",
+				"FALSE"
+			]
 		},
 		{
 			"id": "venn_numbers_format_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisVennDiagram",
 			"name": "Venn numbers format",
 			"param_name": "venn_numbers_format",
 			"description": "Format for numbers in the Venn diagram: 'raw', 'percent', 'raw-percent', or 'percent-raw'",
@@ -100,7 +116,7 @@
 		},
 		{
 			"id": "venn_significant_digits_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisVennDiagram",
 			"name": "Venn significant digits",
 			"param_name": "venn_significant_digits",
 			"description": "Number of significant digits for the Venn diagram numbers",
@@ -110,7 +126,7 @@
 		},
 		{
 			"id": "venn_category_names_distance_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisVennDiagram",
 			"name": "Category names distance",
 			"param_name": "venn_category_names_distance",
 			"description": "Distance of category names from Venn circles (comma-separated numeric values)",
@@ -119,7 +135,7 @@
 		},
 		{
 			"id": "venn_category_names_position_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisVennDiagram",
 			"name": "Category names position",
 			"param_name": "venn_category_names_position",
 			"description": "Position of category names (in degrees, comma-separated numeric values)",
@@ -128,7 +144,7 @@
 		},
 		{
 			"id": "intersections_order_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisIntersectionPlot",
 			"name": "Intersections order",
 			"param_name": "intersections_order",
 			"description": "Order of intersections in the plot: 'degree' or 'freq'",
@@ -138,17 +154,21 @@
 		},
 		{
 			"id": "display_empty_intersections_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisIntersectionPlot",
 			"name": "Display empty intersections",
 			"param_name": "display_empty_intersections",
 			"description": "Display empty intersections in the plot",
-			"type": "text",
+			"type": "list",
 			"value_type": "string",
-			"default_value": "FALSE"
+			"default_value": "FALSE",
+			"extra_data": [
+				"TRUE",
+				"FALSE"
+			]
 		},
 		{
 			"id": "table_content_id",
-			"category": "FvI4Z2eb9sjL47Jt",
+			"category": "VisGeneral",
 			"name": "Table content",
 			"param_name": "table_content",
 			"description": "Content of the table: 'all intersections' or 'selected intersections'",
@@ -158,7 +178,7 @@
 		},
 		{
 			"id": "venn_fill_colors_id",
-			"category": "PlotStyling",
+			"category": "VisVennDiagram",
 			"name": "Venn fill colors",
 			"param_name": "venn_fill_colors",
 			"description": "Comma-separated fill colors for Venn diagram categories",
@@ -168,7 +188,7 @@
 		},
 		{
 			"id": "venn_fill_transparency_id",
-			"category": "PlotStyling",
+			"category": "VisVennDiagram",
 			"name": "Venn fill transparency",
 			"param_name": "venn_fill_transparency",
 			"description": "Transparency level for the Venn diagram fill colors (0-1)",
@@ -178,7 +198,7 @@
 		},
 		{
 			"id": "venn_border_colors_id",
-			"category": "PlotStyling",
+			"category": "VisVennDiagram",
 			"name": "Venn border colors",
 			"param_name": "venn_border_colors",
 			"description": "Border colors for Venn diagram categories. Set to 'fill colors' to use fill colors, or specify color names.",
@@ -188,7 +208,7 @@
 		},
 		{
 			"id": "venn_font_size_for_category_names_id",
-			"category": "PlotStyling",
+			"category": "VisVennDiagram",
 			"name": "Category names font size",
 			"param_name": "venn_font_size_for_category_names",
 			"description": "Font size for category names in the Venn diagram",
@@ -198,7 +218,7 @@
 		},
 		{
 			"id": "venn_font_size_for_counts_id",
-			"category": "PlotStyling",
+			"category": "VisVennDiagram",
 			"name": "Counts font size",
 			"param_name": "venn_font_size_for_counts",
 			"description": "Font size for counts in the Venn diagram",
@@ -208,7 +228,7 @@
 		},
 		{
 			"id": "venn_outer_margin_id",
-			"category": "PlotStyling",
+			"category": "VisVennDiagram",
 			"name": "Outer margin",
 			"param_name": "venn_outer_margin",
 			"description": "Outer margin for the Venn diagram",
@@ -218,7 +238,7 @@
 		},
 		{
 			"id": "intersection_bar_color_id",
-			"category": "PlotStyling",
+			"category": "VisIntersectionPlot",
 			"name": "Intersection bar color",
 			"param_name": "intersection_bar_color",
 			"description": "Color for the intersection bars in the plot",
@@ -228,7 +248,7 @@
 		},
 		{
 			"id": "intersection_point_size_id",
-			"category": "PlotStyling",
+			"category": "VisIntersectionPlot",
 			"name": "Intersection point size",
 			"param_name": "intersection_point_size",
 			"description": "Size of points in the intersection plot",
@@ -238,7 +258,7 @@
 		},
 		{
 			"id": "intersection_line_width_id",
-			"category": "PlotStyling",
+			"category": "VisIntersectionPlot",
 			"name": "Intersection line width",
 			"param_name": "intersection_line_width",
 			"description": "Width of lines in the intersection plot",
@@ -248,7 +268,7 @@
 		},
 		{
 			"id": "table_font_size_id",
-			"category": "PlotStyling",
+			"category": "VisGeneral",
 			"name": "Table font size",
 			"param_name": "table_font_size",
 			"description": "Font size for the table in the plot",
@@ -258,7 +278,7 @@
 		},
 		{
 			"id": "image_width_id",
-			"category": "PlotStyling",
+			"category": "VisGeneral",
 			"name": "Image width",
 			"param_name": "image_width",
 			"description": "Output image width in pixels",
@@ -268,7 +288,7 @@
 		},
 		{
 			"id": "image_height_id",
-			"category": "PlotStyling",
+			"category": "VisGeneral",
 			"name": "Image height",
 			"param_name": "image_height",
 			"description": "Output image height in pixels",
@@ -278,7 +298,7 @@
 		},
 		{
 			"id": "dpi_id",
-			"category": "PlotStyling",
+			"category": "VisGeneral",
 			"name": "DPI",
 			"param_name": "dpi",
 			"description": "Dots per inch of output image",
@@ -288,7 +308,7 @@
 		},
 		{
 			"id": "plot_filename_id",
-			"category": "PlotStyling",
+			"category": "VisGeneral",
 			"name": "Plot filename",
 			"param_name": "plot_filename",
 			"description": "Plot output filename",
