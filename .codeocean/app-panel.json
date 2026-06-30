@@ -96,9 +96,13 @@
 			"name": "Force unique elements",
 			"param_name": "venn_force_unique",
 			"description": "Force unique elements in the Venn diagram",
-			"type": "text",
+			"type": "list",
 			"value_type": "string",
-			"default_value": "TRUE"
+			"default_value": "TRUE",
+			"extra_data": [
+				"TRUE",
+				"FALSE"
+			]
 		},
 		{
 			"id": "venn_numbers_format_id",
@@ -154,9 +158,13 @@
 			"name": "Display empty intersections",
 			"param_name": "display_empty_intersections",
 			"description": "Display empty intersections in the plot",
-			"type": "text",
+			"type": "list",
 			"value_type": "string",
-			"default_value": "FALSE"
+			"default_value": "FALSE",
+			"extra_data": [
+				"TRUE",
+				"FALSE"
+			]
 		},
 		{
 			"id": "table_content_id",
