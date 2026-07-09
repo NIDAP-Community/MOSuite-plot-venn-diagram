@@ -1,16 +1,16 @@
-name: test
+name: tests
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [main, dev]
   pull_request:
-    branches: [ main, dev ]
+    branches: [main, dev]
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
       - name: Parse environment.json and set Docker image
         id: docker_image
