@@ -2,10 +2,10 @@
 rlang::global_entrace()
 library(argparse)
 library(glue)
-devtools::load_all('/code/MOSuite')
 library(readr)
 library(stringr)
 library(dplyr)
+devtools::load_all('/code/MOSuite')
 
 # parse comma-separated numeric vectors
 parse_numeric_vector <- function(x) {
