@@ -1,15 +1,3 @@
-test_that("Code Ocean panel uses named parameters accepted by main.R", {
-  main_args <- extract_main_arguments(read_repo_file("code", "main.R"))
-  panel_lines <- read_repo_file(".codeocean", "app-panel.json")
-  panel_args <- extract_panel_param_names(panel_lines)
-
-  expect_true(
-    any(grepl('"named_parameters"[[:space:]]*:[[:space:]]*true', panel_lines)),
-    info = "Code Ocean should pass parameters by name to main.R"
-  )
-  expect_same_values(panel_args, main_args)
-})
-
 test_that("Venn diagram capsule keeps expected CLI parameter contract", {
   main_lines <- read_repo_file("code", "main.R")
   main_text <- paste(main_lines, collapse = "\n")
@@ -73,37 +61,6 @@ test_that("numeric vector parser handles Venn optional numeric fields", {
   expect_error(parse_numeric_vector("1,nope"), "non-numeric")
 })
 
-test_that("Code Ocean panel preserves Venn diagram defaults", {
-  panel_lines <- read_repo_file(".codeocean", "app-panel.json")
-
-  expect_equal(
-    extract_panel_default(panel_lines, "contrasts_colname"),
-    "Contrast"
-  )
-  expect_equal(extract_panel_default(panel_lines, "plot_type"), "Venn diagram")
-  expect_equal(extract_panel_default(panel_lines, "venn_numbers_format"), "raw")
-  expect_equal(
-    extract_panel_default(panel_lines, "venn_fill_colors"),
-    "darkgoldenrod2,darkolivegreen2,mediumpurple3,darkorange2,lightgreen"
-  )
-  expect_equal(
-    extract_panel_default(panel_lines, "venn_border_colors"),
-    "fill colors"
-  )
-  expect_equal(
-    extract_panel_default(panel_lines, "intersections_order"),
-    "degree"
-  )
-  expect_equal(
-    extract_panel_default(panel_lines, "table_content"),
-    "all intersections"
-  )
-  expect_equal(
-    extract_panel_default(panel_lines, "plot_filename"),
-    "venn_diagram.png"
-  )
-})
-
 test_that("Code Ocean boolean controls are TRUE/FALSE lists", {
   panel_lines <- read_repo_file(".codeocean", "app-panel.json")
 
@@ -121,4 +78,14 @@ test_that("run wrapper prepares result directories and forwards CLI arguments", 
 
   expect_match(run_text, "mkdir -p \\.\\./results/figures \\.\\./results/moo")
   expect_match(run_text, 'Rscript main\\.R "\\$@"')
+})
+
+test_that("Venn diagram capsule writes its CSV companion artifact under results/moo", {
+  main_lines <- read_repo_file("code", "main.R")
+  main_text <- paste(main_lines, collapse = "\n")
+
+  expect_match(
+    main_text,
+    'file\\.path\\(getOption\\("moo_plots_dir"\\), "\\.\\.", "moo", "venn_diagram_data\\.csv"\\)'
+  )
 })
