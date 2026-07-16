@@ -1,2 +1,3 @@
 library(testthat)
-test_dir(here::here('tests/testthat/'))
+
+test_dir(file.path("tests", "testthat"))
