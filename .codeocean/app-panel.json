@@ -48,7 +48,7 @@
 			"category": "EzTg1ivlFDHEy9PI",
 			"name": "Contrasts column name",
 			"param_name": "contrasts_colname",
-			"description": "Column name in data that contains the contrast names",
+			"description": "Name of the column in the summarized differential expression data that contains the contrast names.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "Contrast"
@@ -58,7 +58,7 @@
 			"category": "EzTg1ivlFDHEy9PI",
 			"name": "Select contrasts",
 			"param_name": "select_contrasts",
-			"description": "Comma-separated contrast names to select for the plot. If empty, all contrasts are used.",
+			"description": "A vector of contrast names to select for the plot.",
 			"type": "text",
 			"value_type": "string"
 		},
@@ -67,7 +67,7 @@
 			"category": "VisGeneral",
 			"name": "Plot type",
 			"param_name": "plot_type",
-			"description": "Type of plot to generate: 'Venn diagram' or 'Intersection plot'",
+			"description": "Type of plot to generate: Venn diagram or Intersection plot.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "Venn diagram"
@@ -77,7 +77,7 @@
 			"category": "FvI4Z2eb9sjL47Jt",
 			"name": "Feature ID column name",
 			"param_name": "feature_id_colname",
-			"description": "Column name for feature IDs (gene names, etc). If not provided, uses first column",
+			"description": "The column from the counts data containing the Feature IDs, usually Gene or Protein ID. This is usually the first column of the input counts matrix. Only columns of text type from the input counts matrix are available to select for this parameter.",
 			"type": "text",
 			"value_type": "string"
 		},
@@ -86,7 +86,7 @@
 			"category": "VisIntersectionPlot",
 			"name": "Intersection IDs",
 			"param_name": "intersection_ids",
-			"description": "Comma-separated intersection IDs to select for the plot. If empty, all intersections are used.",
+			"description": "A vector of intersection IDs to select for the plot.",
 			"type": "text",
 			"value_type": "string"
 		},
@@ -95,7 +95,7 @@
 			"category": "VisVennDiagram",
 			"name": "Force unique elements",
 			"param_name": "venn_force_unique",
-			"description": "Force unique elements in the Venn diagram",
+			"description": "If TRUE, forces unique elements in the Venn diagram.",
 			"type": "list",
 			"value_type": "string",
 			"default_value": "TRUE",
@@ -109,7 +109,7 @@
 			"category": "VisVennDiagram",
 			"name": "Venn numbers format",
 			"param_name": "venn_numbers_format",
-			"description": "Format for numbers in the Venn diagram: 'raw', 'percent', 'raw-percent', or 'percent-raw'",
+			"description": "Format for the numbers in the Venn diagram. Options are raw, percent, raw-percent, or percent-raw.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "raw"
@@ -119,7 +119,7 @@
 			"category": "VisVennDiagram",
 			"name": "Venn significant digits",
 			"param_name": "venn_significant_digits",
-			"description": "Number of significant digits for the Venn diagram numbers",
+			"description": "Number of significant digits for the Venn diagram numbers.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "2"
@@ -129,7 +129,7 @@
 			"category": "VisVennDiagram",
 			"name": "Category names distance",
 			"param_name": "venn_category_names_distance",
-			"description": "Distance of category names from Venn circles (comma-separated numeric values)",
+			"description": "Distance of the category names from the Venn diagram circles.",
 			"type": "text",
 			"value_type": "string"
 		},
@@ -138,7 +138,7 @@
 			"category": "VisVennDiagram",
 			"name": "Category names position",
 			"param_name": "venn_category_names_position",
-			"description": "Position of category names (in degrees, comma-separated numeric values)",
+			"description": "Position of the category names in the Venn diagram.",
 			"type": "text",
 			"value_type": "string"
 		},
@@ -147,7 +147,7 @@
 			"category": "VisIntersectionPlot",
 			"name": "Intersections order",
 			"param_name": "intersections_order",
-			"description": "Order of intersections in the plot: 'degree' or 'freq'",
+			"description": "Order of the intersections in the plot.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "degree"
@@ -157,7 +157,7 @@
 			"category": "VisIntersectionPlot",
 			"name": "Display empty intersections",
 			"param_name": "display_empty_intersections",
-			"description": "Display empty intersections in the plot",
+			"description": "If TRUE, displays intersections with no features in the plot.",
 			"type": "list",
 			"value_type": "string",
 			"default_value": "FALSE",
@@ -171,7 +171,7 @@
 			"category": "VisGeneral",
 			"name": "Table content",
 			"param_name": "table_content",
-			"description": "Content of the table: 'all intersections' or 'selected intersections'",
+			"description": "Content of the table in the plot.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "all intersections"
@@ -181,7 +181,7 @@
 			"category": "VisVennDiagram",
 			"name": "Venn fill colors",
 			"param_name": "venn_fill_colors",
-			"description": "Comma-separated fill colors for Venn diagram categories",
+			"description": "A vector of colors to fill the Venn diagram categories.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "darkgoldenrod2,darkolivegreen2,mediumpurple3,darkorange2,lightgreen"
@@ -191,7 +191,7 @@
 			"category": "VisVennDiagram",
 			"name": "Venn fill transparency",
 			"param_name": "venn_fill_transparency",
-			"description": "Transparency level for the Venn diagram fill colors (0-1)",
+			"description": "Transparency level for the Venn diagram fill colors.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "0.2"
@@ -201,7 +201,7 @@
 			"category": "VisVennDiagram",
 			"name": "Venn border colors",
 			"param_name": "venn_border_colors",
-			"description": "Border colors for Venn diagram categories. Set to 'fill colors' to use fill colors, or specify color names.",
+			"description": "Colors for the borders of the Venn diagram categories. Use fill colors to match venn_fill_colors, or specify color names.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "fill colors"
@@ -211,7 +211,7 @@
 			"category": "VisVennDiagram",
 			"name": "Category names font size",
 			"param_name": "venn_font_size_for_category_names",
-			"description": "Font size for category names in the Venn diagram",
+			"description": "Font size for the category names in the Venn diagram.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "3"
@@ -221,7 +221,7 @@
 			"category": "VisVennDiagram",
 			"name": "Counts font size",
 			"param_name": "venn_font_size_for_counts",
-			"description": "Font size for counts in the Venn diagram",
+			"description": "Font size for the counts in the Venn diagram.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "6"
@@ -231,7 +231,7 @@
 			"category": "VisVennDiagram",
 			"name": "Outer margin",
 			"param_name": "venn_outer_margin",
-			"description": "Outer margin for the Venn diagram",
+			"description": "Outer margin for the Venn diagram.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "0"
@@ -251,7 +251,7 @@
 			"category": "VisIntersectionPlot",
 			"name": "Intersection point size",
 			"param_name": "intersection_point_size",
-			"description": "Size of points in the intersection plot",
+			"description": "Size of the points in the intersection plot.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "2.2"
@@ -261,7 +261,7 @@
 			"category": "VisIntersectionPlot",
 			"name": "Intersection line width",
 			"param_name": "intersection_line_width",
-			"description": "Width of lines in the intersection plot",
+			"description": "Width of the lines in the intersection plot.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "0.7"
@@ -301,7 +301,7 @@
 			"category": "VisGeneral",
 			"name": "DPI",
 			"param_name": "dpi",
-			"description": "Dots per inch of output image",
+			"description": "Dots per inch of the output image.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "300"
@@ -311,7 +311,7 @@
 			"category": "VisGeneral",
 			"name": "Plot filename",
 			"param_name": "plot_filename",
-			"description": "Plot output filename",
+			"description": "Plot output filename. When multiple comparisons are saved separately, the comparison name is appended before the file extension.",
 			"type": "text",
 			"value_type": "string",
 			"default_value": "venn_diagram.png"
