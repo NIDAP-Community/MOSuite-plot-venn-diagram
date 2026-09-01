@@ -14,7 +14,8 @@
 	"categories": [
 		{
 			"id": "EzTg1ivlFDHEy9PI",
-			"name": "Basic",
+			"name": "DEG Filtering & Contrasts",
+			"description": "Select DEG columns, strict thresholds, and contrasts included in the plot",
 			"icon": "📂"
 		},
 		{
