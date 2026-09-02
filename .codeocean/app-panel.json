@@ -14,7 +14,8 @@
 	"categories": [
 		{
 			"id": "EzTg1ivlFDHEy9PI",
-			"name": "Basic",
+			"name": "DEG Filtering & Contrasts",
+			"description": "Select DEG columns, strict thresholds, and contrasts included in the plot",
 			"icon": "📂"
 		},
 		{
@@ -44,21 +45,51 @@
 	],
 	"parameters": [
 		{
-			"id": "contrasts_colname_id",
+			"id": "signif_colname_id",
 			"category": "EzTg1ivlFDHEy9PI",
-			"name": "Contrasts column name",
-			"param_name": "contrasts_colname",
-			"description": "Name of the column in the summarized differential expression data that contains the contrast names.",
+			"name": "Significance column name",
+			"param_name": "signif_colname",
+			"description": "Significance column in each DEG contrast result. Default is adjpval.",
 			"type": "text",
 			"value_type": "string",
-			"default_value": "Contrast"
+			"default_value": "adjpval"
+		},
+		{
+			"id": "signif_threshold_id",
+			"category": "EzTg1ivlFDHEy9PI",
+			"name": "Significance threshold",
+			"param_name": "signif_threshold",
+			"description": "Numeric significance threshold. Features are included when their p-value or adjusted p-value is strictly less than this cutoff.",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "0.05"
+		},
+		{
+			"id": "change_colname_id",
+			"category": "EzTg1ivlFDHEy9PI",
+			"name": "Fold change column name",
+			"param_name": "change_colname",
+			"description": "Log fold-change column in each DEG contrast result. Default is logFC.",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "logFC"
+		},
+		{
+			"id": "change_threshold_id",
+			"category": "EzTg1ivlFDHEy9PI",
+			"name": "Fold change threshold",
+			"param_name": "change_threshold",
+			"description": "Numeric absolute log fold-change threshold. Features are included when their absolute log fold-change is strictly greater than this cutoff.",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "1.0"
 		},
 		{
 			"id": "select_contrasts_id",
 			"category": "EzTg1ivlFDHEy9PI",
 			"name": "Select contrasts",
 			"param_name": "select_contrasts",
-			"description": "A vector of contrast names to select for the plot.",
+			"description": "Comma-separated contrast names to include. Leave blank to use all DEG contrasts available in the multiOmicDataSet.",
 			"type": "text",
 			"value_type": "string"
 		},

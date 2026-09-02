@@ -2,9 +2,10 @@
 
 ## Development version
 
-- Use MOSuite v0.4.0.
+- Build Venn and Intersection plots directly from DEG results, with configurable strict thresholds and optional comma-separated contrast selection. (#10, @TJoshMeyer)
 - Sync Code Ocean app panel parameter descriptions with MOSuite package documentation for MOSuite v0.4.1 (#6, @phoman14).
 - Improved the Code Ocean parameter UI for the plot venn diagram capsule. (#2, @phoman14)
+- Use MOSuite v0.4.2.
 
 ## v2.0
 

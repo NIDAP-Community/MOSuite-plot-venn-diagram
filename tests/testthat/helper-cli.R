@@ -79,9 +79,15 @@ expect_outputs_created <- function(results_dir) {
 }
 
 common_cli_args <- c(
-  "--contrasts_colname=Contrast",
+  "--signif_colname=adjpval",
+  "--signif_threshold=0.05",
+  "--change_colname=logFC",
+  "--change_threshold=1.0",
   "--venn_numbers_format=raw",
   "--intersections_order=degree",
   "--display_empty_intersections=FALSE",
+  "--image_width=400",
+  "--image_height=300",
+  "--dpi=72",
   "--plot_filename=venn_diagram.png"
 )
