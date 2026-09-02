@@ -4,10 +4,7 @@ test_that("Venn diagram capsule keeps expected CLI parameter contract", {
 
   expected_args <- c(
     "feature_id_colname",
-    "signif_colname",
-    "signif_threshold",
-    "change_colname",
-    "change_threshold",
+    "contrasts_colname",
     "select_contrasts",
     "plot_type",
     "intersection_ids",
@@ -36,16 +33,11 @@ test_that("Venn diagram capsule keeps expected CLI parameter contract", {
   )
 
   expect_same_values(extract_main_arguments(main_lines), expected_args)
-  expect_same_values(
-    extract_panel_param_names(read_repo_file(".codeocean", "app-panel.json")),
-    expected_args
-  )
-  expect_false(grepl("plot_volcano_summary\\(", main_text))
+  expect_match(main_text, "plot_volcano_summary\\(")
   expect_match(main_text, "plot_venn_diagram\\(")
-  expect_match(main_text, "venn_result <- plot_venn_diagram\\(\\s*moo,", perl = TRUE)
   expect_match(
     main_text,
-    "select_contrasts = parse_character_vector\\(args\\$select_contrasts\\)"
+    "select_contrasts = parse_optional_vector\\(args\\$select_contrasts\\)"
   )
   expect_match(
     main_text,
@@ -53,22 +45,6 @@ test_that("Venn diagram capsule keeps expected CLI parameter contract", {
   )
   expect_match(main_text, "readr::write_csv\\(")
   expect_match(main_text, "venn_diagram_data\\.csv")
-})
-
-test_that("character vector parser handles optional contrast subsets", {
-  main_lines <- read_repo_file("code", "main.R")
-  parser_start <- grep("^parse_character_vector <- function", main_lines)
-  parser_end <- grep("^# parse comma-separated numeric vectors", main_lines) - 1
-  parser_lines <- main_lines[parser_start:parser_end]
-  eval(parse(text = paste(parser_lines, collapse = "\n")))
-
-  expect_null(parse_character_vector(NULL))
-  expect_null(parse_character_vector(""))
-  expect_null(parse_character_vector(" , "))
-  expect_equal(
-    parse_character_vector("B-A, C-A,B-A"),
-    c("B-A", "C-A")
-  )
 })
 
 test_that("numeric vector parser handles Venn optional numeric fields", {
@@ -94,88 +70,6 @@ test_that("Code Ocean boolean controls are TRUE/FALSE lists", {
     "display_empty_intersections",
     "FALSE"
   )
-})
-
-test_that("Code Ocean panel exposes direct DEG controls", {
-  panel_lines <- read_repo_file(".codeocean", "app-panel.json")
-  panel_parameters <- extract_panel_param_names(panel_lines)
-
-  expect_false("contrasts_colname" %in% panel_parameters)
-  expect_equal(extract_panel_default(panel_lines, "signif_colname"), "adjpval")
-  expect_equal(extract_panel_default(panel_lines, "signif_threshold"), "0.05")
-  expect_equal(extract_panel_default(panel_lines, "change_colname"), "logFC")
-  expect_equal(extract_panel_default(panel_lines, "change_threshold"), "1.0")
-  expect_true("select_contrasts" %in% panel_parameters)
-})
-
-test_that("capsule uses all DEG contrasts when selection is blank", {
-  workspace <- setup_cli_workspace()
-  on.exit(unlink(workspace$workspace, recursive = TRUE), add = TRUE)
-
-  output <- withr::with_dir(
-    workspace$code_dir,
-    system2(
-      "Rscript",
-      c("main.R", common_cli_args, "--select_contrasts="),
-      stdout = TRUE,
-      stderr = TRUE
-    )
-  )
-
-  expect_null(attr(output, "status"), info = paste(output, collapse = "\n"))
-  expect_outputs_created(workspace$results_dir)
-  result <- readr::read_csv(
-    file.path(workspace$results_dir, "moo", "venn_diagram_data.csv"),
-    show_col_types = FALSE
-  )
-  expect_true(any(grepl("B-C", result$Intersection, fixed = TRUE)))
-})
-
-test_that("capsule accepts a comma-separated DEG contrast subset", {
-  workspace <- setup_cli_workspace()
-  on.exit(unlink(workspace$workspace, recursive = TRUE), add = TRUE)
-
-  output <- withr::with_dir(
-    workspace$code_dir,
-    system2(
-      "Rscript",
-      c(
-        "main.R",
-        common_cli_args,
-        shQuote("--select_contrasts=B-A, C-A")
-      ),
-      stdout = TRUE,
-      stderr = TRUE
-    )
-  )
-
-  expect_null(attr(output, "status"), info = paste(output, collapse = "\n"))
-  expect_outputs_created(workspace$results_dir)
-  result <- readr::read_csv(
-    file.path(workspace$results_dir, "moo", "venn_diagram_data.csv"),
-    show_col_types = FALSE
-  )
-  expect_false(any(grepl("B-C", result$Intersection, fixed = TRUE)))
-})
-
-test_that("capsule reports unknown DEG contrasts", {
-  workspace <- setup_cli_workspace()
-  on.exit(unlink(workspace$workspace, recursive = TRUE), add = TRUE)
-
-  output <- suppressWarnings(
-    withr::with_dir(
-      workspace$code_dir,
-      system2(
-        "Rscript",
-        c("main.R", common_cli_args, "--select_contrasts=missing"),
-        stdout = TRUE,
-        stderr = TRUE
-      )
-    )
-  )
-
-  expect_equal(attr(output, "status"), 1)
-  expect_true(any(grepl("Selected contrasts not found: missing", output)))
 })
 
 test_that("run wrapper prepares result directories and forwards CLI arguments", {

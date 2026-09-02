@@ -7,19 +7,6 @@ library(stringr)
 library(dplyr)
 devtools::load_all('/code/MOSuite')
 
-# parse an optional comma-separated character vector
-parse_character_vector <- function(x) {
-  if (is.null(x) || length(x) == 0) {
-    return(NULL)
-  }
-  values <- trimws(unlist(strsplit(x, ",", fixed = TRUE)))
-  values <- unique(values[nzchar(values)])
-  if (length(values) == 0) {
-    return(NULL)
-  }
-  return(values)
-}
-
 # parse comma-separated numeric vectors
 parse_numeric_vector <- function(x) {
   if (is.null(x) || identical(x, "") || length(x) == 0) {
@@ -50,34 +37,16 @@ parser$add_argument(
   help = "Column name for feature IDs"
 )
 parser$add_argument(
-  "--signif_colname",
+  "--contrasts_colname",
   type = "character",
-  default = "adjpval",
-  help = "Significance column in each contrast result"
-)
-parser$add_argument(
-  "--signif_threshold",
-  type = "double",
-  default = 0.05,
-  help = "Significance cutoff for p-values"
-)
-parser$add_argument(
-  "--change_colname",
-  type = "character",
-  default = "logFC",
-  help = "Log fold-change column in each contrast result"
-)
-parser$add_argument(
-  "--change_threshold",
-  type = "double",
-  default = 1.0,
-  help = "Absolute log fold-change cutoff"
+  default = "Contrast",
+  help = "Column name for contrast names"
 )
 parser$add_argument(
   "--select_contrasts",
   type = "character",
   default = "",
-  help = "Comma-separated contrast names; leave blank to use all contrasts"
+  help = "Comma-separated contrast names to select"
 )
 parser$add_argument(
   "--plot_type",
@@ -230,14 +199,20 @@ args <- parser$parse_args()
 # load multiOmicDataSet from data directory
 moo <- load_moo_from_data_dir()
 
-venn_result <- plot_venn_diagram(
+# First, generate volcano summary to get the differential expression summary data
+# (This is required input for the venn diagram function)
+summary_dat <- plot_volcano_summary(
   moo,
+  print_plots = FALSE,
+  save_plots = FALSE
+)
+
+# Now generate the venn diagram from the summary data
+venn_result <- plot_venn_diagram(
+  summary_dat,
   feature_id_colname = args$feature_id_colname,
-  signif_colname = args$signif_colname,
-  signif_threshold = args$signif_threshold,
-  change_colname = args$change_colname,
-  change_threshold = args$change_threshold,
-  select_contrasts = parse_character_vector(args$select_contrasts),
+  contrasts_colname = args$contrasts_colname,
+  select_contrasts = parse_optional_vector(args$select_contrasts),
   plot_type = args$plot_type,
   intersection_ids = parse_numeric_vector(args$intersection_ids),
   venn_force_unique = args$venn_force_unique,
