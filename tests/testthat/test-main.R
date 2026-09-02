@@ -42,11 +42,7 @@ test_that("Venn diagram capsule keeps expected CLI parameter contract", {
   )
   expect_false(grepl("plot_volcano_summary\\(", main_text))
   expect_match(main_text, "plot_venn_diagram\\(")
-  expect_match(
-    main_text,
-    "venn_result <- plot_venn_diagram\\(\\s*moo,",
-    perl = TRUE
-  )
+  expect_match(main_text, "venn_result <- plot_venn_diagram\\(\\s*moo,", perl = TRUE)
   expect_match(
     main_text,
     "select_contrasts = parse_character_vector\\(args\\$select_contrasts\\)"
