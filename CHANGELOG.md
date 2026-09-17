@@ -2,6 +2,8 @@
 
 ## Development version
 
+- Use MOSuite v0.5.0. (#12, @kelly-sovacool)
+
 ## v3.0
 
 - Sync Code Ocean app panel parameter descriptions with MOSuite package documentation for MOSuite v0.4.1 (#6, @phoman14).
