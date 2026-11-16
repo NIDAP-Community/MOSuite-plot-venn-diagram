@@ -28,6 +28,10 @@ setup_cli_workspace <- function(prefix = "mosuite_plot_venn_diagram_test_") {
   )
 
   file.copy(
+    file.path(repo_root, "code", "deg-input.R"),
+    file.path(code_dir, "deg-input.R")
+  )
+  file.copy(
     file.path(repo_root, "code", "main.R"),
     file.path(code_dir, "main.R"),
     overwrite = TRUE

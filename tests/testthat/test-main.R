@@ -3,6 +3,8 @@ test_that("Venn diagram capsule keeps expected CLI parameter contract", {
   main_text <- paste(main_lines, collapse = "\n")
 
   expected_args <- c(
+    "input_type",
+    "input_file",
     "feature_id_colname",
     "contrasts_colname",
     "select_contrasts",

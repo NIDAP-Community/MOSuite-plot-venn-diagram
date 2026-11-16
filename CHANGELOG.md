@@ -2,6 +2,15 @@
 
 ## Development version
 
+- Accept OMIX DEG CSV/TSV/TXT alongside MOO input, with MOO-first automatic
+  discovery and explicit input type/file controls.
+- Reuse the existing DEG summary-to-membership path for both input formats.
+- Add MOO/table CLI parity tests, including identical contrast memberships.
+- Temporarily patch the vendored Venn function to preserve table dimensions
+  for a single intersection. The same fix is in the canonical local MOSuite
+  branch `fix/venn-single-intersection`; upstream release and SyncWeaver update
+  remain required before capsule release.
+
 ## v4.0
 
 - Use MOSuite v0.5.0. (#12, @kelly-sovacool)
