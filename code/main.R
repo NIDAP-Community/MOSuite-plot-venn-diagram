@@ -199,7 +199,9 @@ args <- parser$parse_args()
 
 # load multiOmicDataSet from data directory
 deg_input <- load_deg_input(args$feature_id_colname)
-if (!is.data.frame(deg_input)) deg_input <- join_dfs_wide(deg_input@analyses$diff)
+if (!is.data.frame(deg_input)) {
+  deg_input <- join_dfs_wide(deg_input@analyses$diff)
+}
 
 # First, generate volcano summary to get the differential expression summary data
 # (This is required input for the venn diagram function)

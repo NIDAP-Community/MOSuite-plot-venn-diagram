@@ -4,7 +4,10 @@
 deg_unique_file <- function(paths, label) {
   if (length(paths) != 1L) {
     stop(
-      "Expected exactly one ", label, " input; found ", length(paths),
+      "Expected exactly one ",
+      label,
+      " input; found ",
+      length(paths),
       if (length(paths)) paste0(": ", paste(paths, collapse = ", ")) else ".",
       if (length(paths)) "" else " Attach one supported input.",
       call. = FALSE
@@ -16,13 +19,16 @@ deg_unique_file <- function(paths, label) {
 deg_validate_table <- function(dat, feature_id_colname = NULL) {
   if (!is.data.frame(dat) || ncol(dat) < 2L || nrow(dat) == 0L) {
     stop(
-      "DEG table must contain features and contrast statistics.", call. = FALSE
+      "DEG table must contain features and contrast statistics.",
+      call. = FALSE
     )
   }
   if (anyDuplicated(names(dat))) {
     stop("DEG table contains duplicate column names.", call. = FALSE)
   }
-  if (is.null(feature_id_colname)) feature_id_colname <- names(dat)[[1L]]
+  if (is.null(feature_id_colname)) {
+    feature_id_colname <- names(dat)[[1L]]
+  }
   if (!feature_id_colname %in% names(dat)) {
     stop("Feature ID column not found: ", feature_id_colname, call. = FALSE)
   }
@@ -41,7 +47,8 @@ deg_validate_table <- function(dat, feature_id_colname = NULL) {
     }
     columns <- intersect(
       paste0(
-        contrast, c("_FC", "_logFC", "_SE", "_tstat", "_pval", "_adjpval")
+        contrast,
+        c("_FC", "_logFC", "_SE", "_tstat", "_pval", "_adjpval")
       ),
       names(dat)
     )
@@ -49,7 +56,9 @@ deg_validate_table <- function(dat, feature_id_colname = NULL) {
       values <- dat[[column]]
       if (!is.numeric(values) || any(!is.finite(values))) {
         stop(
-          "DEG statistic must be finite and numeric: ", column, call. = FALSE
+          "DEG statistic must be finite and numeric: ",
+          column,
+          call. = FALSE
         )
       }
       if (column %in% p_columns && any(values < 0 | values > 1)) {
@@ -58,15 +67,20 @@ deg_validate_table <- function(dat, feature_id_colname = NULL) {
     }
   }
   # Put the chosen ID first: MOSuite's wide-table joins use the first column.
-  dat <- dat[, c(
-    feature_id_colname, setdiff(names(dat), feature_id_colname)
-  ), drop = FALSE]
+  dat <- dat[,
+    c(
+      feature_id_colname,
+      setdiff(names(dat), feature_id_colname)
+    ),
+    drop = FALSE
+  ]
   dat[[feature_id_colname]] <- ids
   dat
 }
 
 load_deg_input <- function(
-  feature_id_colname = NULL, data_dir = file.path("..", "data")
+  feature_id_colname = NULL,
+  data_dir = file.path("..", "data")
 ) {
   files <- list.files(data_dir, recursive = TRUE, full.names = TRUE)
   rds <- files[grepl("[.]rds$", files, ignore.case = TRUE)]
@@ -83,13 +97,16 @@ load_deg_input <- function(
     # Capsule pins include both the older MOSuite and newer MOObject classes.
     if (!S7::S7_inherits(moo, MOSuite::multiOmicDataSet)) {
       moo <- MOSuite::multiOmicDataSet(
-        sample_metadata = moo@sample_meta, anno_dat = moo@annotation,
-        counts_lst = moo@counts, analyses_lst = moo@analyses
+        sample_metadata = moo@sample_meta,
+        anno_dat = moo@annotation,
+        counts_lst = moo@counts,
+        analyses_lst = moo@analyses
       )
     }
     S7::validate(moo)
     if (
-      !is.list(moo@analyses$diff) || !length(moo@analyses$diff) ||
+      !is.list(moo@analyses$diff) ||
+        !length(moo@analyses$diff) ||
         is.null(names(moo@analyses$diff)) ||
         anyNA(names(moo@analyses$diff)) ||
         any(!nzchar(trimws(names(moo@analyses$diff)))) ||
@@ -131,7 +148,8 @@ deg_table_to_moo <- function(dat, feature_id_colname = NULL) {
     analyses_lst = list(
       diff = diff,
       deg_input = list(
-        type = "table", raw_counts_available = FALSE,
+        type = "table",
+        raw_counts_available = FALSE,
         source_table = dat
       )
     )

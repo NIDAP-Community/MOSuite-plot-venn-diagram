@@ -156,7 +156,10 @@ test_that("discovery prefers MOO and accepts only DEG_Analysis.csv", {
   invalid_root <- file.path(root, "invalid")
   dir.create(invalid_root)
   saveRDS(list(not_a_moo = TRUE), file.path(invalid_root, "invalid.rds"))
-  expect_error(load_deg_input(data_dir = invalid_root), "not a multiOmicDataSet")
+  expect_error(
+    load_deg_input(data_dir = invalid_root),
+    "not a multiOmicDataSet"
+  )
 })
 
 test_that("analysis-only MOO invents no counts or standard-deviation aliases", {
