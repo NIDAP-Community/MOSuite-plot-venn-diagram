@@ -6,7 +6,7 @@ deg_unique_file <- function(paths, label) {
     stop(
       "Expected exactly one ", label, " input; found ", length(paths),
       if (length(paths)) paste0(": ", paste(paths, collapse = ", ")) else ".",
-      " Select --input_file explicitly.",
+      if (length(paths)) "" else " Attach one supported input.",
       call. = FALSE
     )
   }
@@ -66,41 +66,13 @@ deg_validate_table <- function(dat, feature_id_colname = NULL) {
 }
 
 load_deg_input <- function(
-  input_type = "auto", input_file = "", feature_id_colname = NULL,
-  data_dir = file.path("..", "data")
+  feature_id_colname = NULL, data_dir = file.path("..", "data")
 ) {
-  input_type <- match.arg(input_type, c("auto", "moo", "table"))
-  if (nzchar(input_file)) {
-    if (!file.exists(input_file)) {
-      stop("Input file does not exist: ", input_file, call. = FALSE)
-    }
-    path <- input_file
-    if (input_type == "auto") {
-      input_type <- if (tolower(tools::file_ext(path)) == "rds") {
-        "moo"
-      } else {
-        "table"
-      }
-    }
-  } else {
-    files <- list.files(data_dir, recursive = TRUE, full.names = TRUE)
-    rds <- files[grepl("[.]rds$", files, ignore.case = TRUE)]
-    if (input_type == "auto") input_type <- if (length(rds)) "moo" else "table"
-    if (input_type == "moo") {
-      path <- deg_unique_file(rds, "MOO RDS")
-    } else {
-      # Metadata, package inventories and diagnostics are not DEG inputs.
-      tables <- files[tolower(basename(files)) %in% c(
-        "deg_analysis.csv", "deg_analysis.tsv", "deg_analysis.txt"
-      )]
-      path <- deg_unique_file(tables, "DEG_Analysis table")
-    }
-  }
-  message("Reading ", input_type, " DEG input from ", path)
-  if (input_type == "moo") {
-    if (tolower(tools::file_ext(path)) != "rds") {
-      stop("MOO input must be an RDS file.", call. = FALSE)
-    }
+  files <- list.files(data_dir, recursive = TRUE, full.names = TRUE)
+  rds <- files[grepl("[.]rds$", files, ignore.case = TRUE)]
+  if (length(rds)) {
+    path <- deg_unique_file(rds, "MOO RDS")
+    message("Reading MOO DEG input from ", path)
     moo <- readr::read_rds(path)
     if (
       !S7::S7_inherits(moo, S7::S7_object) ||
@@ -131,17 +103,11 @@ load_deg_input <- function(
     }
     return(moo)
   }
-  extension <- tolower(tools::file_ext(path))
-  if (!extension %in% c("csv", "tsv", "txt")) {
-    stop(
-      "DEG table input must be CSV, TSV, or tab-delimited TXT.", call. = FALSE
-    )
-  }
-  dat <- if (extension == "csv") {
-    utils::read.csv(path, check.names = FALSE, stringsAsFactors = FALSE)
-  } else {
-    utils::read.delim(path, check.names = FALSE, stringsAsFactors = FALSE)
-  }
+  # Metadata, package inventories and diagnostics are not DEG inputs.
+  tables <- files[basename(files) == "DEG_Analysis.csv"]
+  path <- deg_unique_file(tables, "DEG_Analysis.csv")
+  message("Reading DEG table input from ", path)
+  dat <- utils::read.csv(path, check.names = FALSE, stringsAsFactors = FALSE)
   deg_validate_table(dat, feature_id_colname)
 }
 

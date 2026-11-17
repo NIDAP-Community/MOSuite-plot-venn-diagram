@@ -2,8 +2,10 @@
 
 ## Development version
 
-- Accept OMIX DEG CSV/TSV/TXT alongside MOO input, with MOO-first automatic
-  discovery and explicit input type/file controls.
+- Accept MOO RDS or the specifically named `DEG_Analysis.csv`, automatically
+  preferring MOO when both formats are present.
+- Keep input discovery controls out of the user-facing panel and restore the
+  capsule's concise README.
 - Reuse the existing DEG summary-to-membership path for both input formats.
 - Add MOO/table CLI parity tests, including identical contrast memberships.
 - Temporarily patch the vendored Venn function to preserve table dimensions
