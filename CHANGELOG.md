@@ -8,10 +8,6 @@
   capsule's concise README.
 - Reuse the existing DEG summary-to-membership path for both input formats.
 - Add MOO/table CLI parity tests, including identical contrast memberships.
-- Temporarily patch the vendored Venn function to preserve table dimensions
-  for a single intersection. The same fix is in the canonical local MOSuite
-  branch `fix/venn-single-intersection`; upstream release and SyncWeaver update
-  remain required before capsule release.
 
 ## v4.0
 
