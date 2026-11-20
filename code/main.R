@@ -29,6 +29,7 @@ setup_capsule_environment()
 
 # parse CLI arguments
 parser <- ArgumentParser()
+source("deg-input.R")
 
 parser$add_argument(
   "--feature_id_colname",
@@ -197,12 +198,16 @@ parser$add_argument(
 args <- parser$parse_args()
 
 # load multiOmicDataSet from data directory
-moo <- load_moo_from_data_dir()
+deg_input <- load_deg_input(args$feature_id_colname)
+if (!is.data.frame(deg_input)) {
+  deg_input <- join_dfs_wide(deg_input@analyses$diff)
+}
 
 # First, generate volcano summary to get the differential expression summary data
 # (This is required input for the venn diagram function)
 summary_dat <- plot_volcano_summary(
-  moo,
+  deg_input,
+  feature_id_colname = args$feature_id_colname,
   print_plots = FALSE,
   save_plots = FALSE
 )
