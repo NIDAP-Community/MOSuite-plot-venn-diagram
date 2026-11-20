@@ -3,7 +3,7 @@
 ## Development version
 
 - Accept MOO RDS or the specifically named `DEG_Analysis.csv`, automatically
-  preferring MOO when both formats are present.
+  preferring MOO when both formats are present. (#14)
 - Keep input discovery controls out of the user-facing panel and restore the
   capsule's concise README.
 - Reuse the existing DEG summary-to-membership path for both input formats.
